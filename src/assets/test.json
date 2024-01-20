@@ -1,0 +1,51 @@
+{
+  "ORIGINAL": [
+    {
+      "ingredient": "name2",
+      "quantity": 0,
+      "carbonMetric": 0
+    },
+    {
+      "ingredient": "name2",
+      "quantity": 0,
+      "carbonMetric": 0
+    }
+  ],
+  "CARBON_EFFICIENT": [
+    {
+      "originalIngredient": "name",
+      "ingredient": "name2",
+      "quantity": 0,
+      "carbonMetric": 0
+    },
+    {
+      "ingredient": "name2",
+      "quantity": 0,
+      "carbonMetric": 0
+    }
+  ],
+  "VEGETARIAN": [
+    {
+      "ingredient": "name2",
+      "quantity": 0,
+      "carbonMetric": 0
+    },
+    {
+      "ingredient": "name2",
+      "quantity": 0,
+      "carbonMetric": 0
+    }
+  ],
+  "VEGAN": [
+    {
+      "ingredient": "name2",
+      "quantity": 0,
+      "carbonMetric": 0
+    },
+    {
+      "ingredient": "name2",
+      "quantity": 0,
+      "carbonMetric": 0
+    }
+  ]
+}
