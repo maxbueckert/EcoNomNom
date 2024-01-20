@@ -7,7 +7,10 @@ class HTMLTextProcessor:
     def process_raw_html_text(raw_html_text):
         '''Processes the html text sent from the frontend. 
         If the html text is not from a recipe, returns an empty string. Otherwise, returns the processed text ready for GPT.'''
-        pass
+        if HTMLTextProcessor.is_recipe_page(raw_html_text):
+            return HTMLTextProcessor.reduce_html_text(raw_html_text)
+        
+        return ""
 
 
     @staticmethod
@@ -29,6 +32,12 @@ class HTMLTextProcessor:
     @staticmethod
     def reduce_html_text(recipe_page_html_text):
         '''Reduces html text before sending to GPT. Assumes that input html text is from a recipe page. 
-        Returns the reduced text as a string'''
-        pass
+        Returns the reduced text as a string, or empty string if no match is found.'''
+        find_ingredient_list_query = '(ingredient|Ingredient|INGREDIENT)(\s*.*)*'
+        text_after_ingredient = recipe_page_html_text.search(find_ingredient_list_query)
+
+        if text_after_ingredient:
+            return text_after_ingredient.string
+
+        return ""
 
