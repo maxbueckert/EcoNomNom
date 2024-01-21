@@ -15,20 +15,30 @@ const bull = (
 const card = (
   <React.Fragment>
     <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" variant="h2">
-        Welcome to EcoNomNom!
+      <Typography
+        sx={{ fontSize: 18, fontWeight: 'bold' }}
+        color="primary"
+        variant="h2"
+        gutterBottom
+      >
+        Welcome to EcoNomNom, where every 'Nom' is a step towards a greener planet!
       </Typography>
-      <Typography variant="body3" component="div">
-        Munching Towards a Greener Planet with Every Nom!
+
+      <Typography
+        variant="h6"
+        component="div"
+        sx={{ marginTop: 2, marginBottom: 1 }}
+        color="text.secondary"
+      >
+        How do we work our magic?
       </Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        How does it work?
-      </Typography>
-      <Typography variant="body2">
-        Any time you enter a website which contains a recipe, NomNom will detect it and reccomend
-        you more sustainable adjustments
+
+      <Typography variant="body1" sx={{ lineHeight: 1.5, marginTop: 1 }}>
+        Simple! Stumble upon any online recipe, and our clever NomNom Monster jumps in, suggesting
+        scrumptious, sustainable swaps for your dish. Cook, munch, and smile benevolently, knowing
+        you're helping the Earth with every bite!
         <br />
-        {'"a benevolent smile"'}
+        <em>{'"a benevolent smile"'}</em>
       </Typography>
     </CardContent>
     <div>
