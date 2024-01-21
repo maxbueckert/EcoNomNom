@@ -29,7 +29,7 @@ export default defineManifest({
   ],
   web_accessible_resources: [
     {
-      resources: ['icons/brandLogo.png', 'icons/brandLogo.png'], // Updated path
+      resources: ['icons/brandLogo.png', 'icons/character.png'], // Updated path
       matches: [],
     },
   ],
