@@ -67,11 +67,11 @@ export default function Ingredient({ recipeObject, recipeType }) {
   return (
     <Box sx={{ flex: 1, p: 3, flexGrow: 1 }}>
       <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
-        {recipeObject[recipeType].Title}
+        {recipeObject['original'].Title}
       </Typography>
 
       <Typography sx={{ mb: 1.5, fontStyle: 'italic' }} color="text.secondary">
-        {capitalizeFirstLetter(recipeType)}
+        {recipeType == 'optimized' ? 'Low Emissions' : capitalizeFirstLetter(recipeType)}
       </Typography>
 
       <Typography sx={{ mb: 1.5, fontSize: 14, marginBottom: 2 }} color="text.secondary">

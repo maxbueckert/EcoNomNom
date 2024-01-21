@@ -32,7 +32,6 @@ function App() {
           })
         setHasRequested(true)
         console.log('received data')
-        console.log(response)
       } catch (error) {
         console.error('Error fetching data:', error)
       }
