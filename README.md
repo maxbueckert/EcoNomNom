@@ -1,3 +1,31 @@
+![image](https://github.com/maxbueckert/EcoNomNom/assets/85324120/04c61cf2-d6a9-4879-aae1-08b6becce51b)
+
+
+## Inspiration
+The inspiration behind EcoNomNom stemmed from a collective desire to address the environmental impact of our daily choices, particularly in the realm of food consumption. We recognized the need for a tool that effortlessly integrates with users' existing habits, guiding them towards eco-friendly cooking alternatives without compromising on taste or convenience.
+
+## What it does
+EcoNomNom is a Chrome extension that enhances the user's cooking experience by providing eco-friendly recipe suggestions from existing recipe pages. The extension analyzes the ingredients of a given recipe and offers sustainable alternatives, promoting conscious food choices. It seamlessly integrates into the browsing experience, making it easy for users to adopt a more environmentally friendly approach to cooking.
+
+## How we built it
+The development of EcoNomNom involved a multi-faceted approach. We utilized React for the frontend, creating a user-friendly interface that seamlessly integrates with the Chrome browser. Leveraging the Chrome Extension API was crucial for achieving the extension's smooth integration into existing recipe pages.
+
+The core functionality of analyzing and suggesting eco-friendly alternatives was implemented using a combination of web scraping techniques, Flask APIs, and custom OpenAI assistants for ingredient analysis. This allowed us to generate meaningful and context-aware suggestions based on the ingredients present in a given recipe.
+
+## Challenges we ran into
+Building EcoNomNom presented several challenges. One significant obstacle was the diversity of recipe websites and formats, requiring us to develop robust mechanisms to ensure compatibility. Additionally, accurately assessing the environmental impact of different ingredients and suggesting viable alternatives posed a complex problem that required careful consideration.
+
+Accomplishments that we're proud of
+Despite the challenges, our team successfully created a functional and user-friendly Chrome extension that promotes sustainable cooking practices. The seamless integration, the accuracy of eco-friendly suggestions, and the overall usability of EcoNomNom are accomplishments that we take pride in.
+
+## What we learned
+The development of EcoNomNom provided valuable insights into web dev, prompt engineering, and the intricacies of creating browser extensions. We gained a deeper understanding of the challenges associated with promoting sustainability in everyday activities and the importance of user-friendly design in driving adoption.
+
+## What's next for EcoNomNom
+Looking ahead, our vision for EcoNomNom includes several exciting enhancements. We plan to allow users to customize their sustainability preferences and dietary restrictions, providing a more tailored experience. Integration with online grocery platforms and the development of collaborative features to share eco-friendly recipes within a community are also on our roadmap. Our commitment to continuous improvement ensures that EcoNomNom will evolve into an even more powerful tool for promoting eco-friendly cooking practices.
+
+
+
 # economnom-extension
 
 > a chrome extension tools built with Vite + React, and Manifest v3
