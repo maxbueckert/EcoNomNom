@@ -13,16 +13,16 @@
     sans-serif;
 
   color-scheme: light dark;
-  background-color: #242424;
+  /* background-color: #242424; */
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    background-color: #fafafa;
+    /* background-color: #fafafa; */
   }
 }
 
 body {
-  min-width: 20rem;
+  /* min-width: 20rem; */
   margin: 0;
 }

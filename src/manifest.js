@@ -7,17 +7,16 @@ export default defineManifest({
   version: packageData.version,
   manifest_version: 3,
   icons: {
-    16: 'img/logo-16.png',
-    32: 'img/logo-34.png',
-    48: 'img/logo-48.png',
-    128: 'img/logo-128.png',
+    16: 'icons/brandLogo.png', // Assuming the same icon is used for all sizes
+    32: 'icons/brandLogo.png',
+    48: 'icons/brandLogo.png',
+    128: 'icons/brandLogo.png',
   },
   action: {
     default_popup: 'popup.html',
-    default_icon: 'img/logo-48.png',
+    default_icon: 'icons/brandLogo.png',
   },
-  // options_page: 'options.html',
-  // devtools_page: 'devtools.html',
+  exclude_matches: ['*://www.google.com/search*'],
   background: {
     service_worker: 'src/background/index.js',
     type: 'module',
@@ -28,12 +27,9 @@ export default defineManifest({
       js: ['src/contentScript/index.jsx'],
     },
   ],
-  // side_panel: {
-  //   default_path: 'sidepanel.html',
-  // },
   web_accessible_resources: [
     {
-      resources: ['img/logo-16.png', 'img/logo-34.png', 'img/logo-48.png', 'img/logo-128.png'],
+      resources: ['icons/brandLogo.png', 'icons/brandLogo.png'], // Updated path
       matches: [],
     },
   ],
