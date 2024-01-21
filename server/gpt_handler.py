@@ -14,7 +14,9 @@ class GPTHandler:
         self.assistant_ids = {
             'parser': os.getenv('PARSER_ASSISTANT_ID'),
             'emissions': os.getenv('EMISSIONS_ASSISTANT_ID'),
-            'optimizer': os.getenv('OPTIMIZER_ASSISTANT_ID')
+            'optimizer': os.getenv('OPTIMIZER_ASSISTANT_ID'),
+            'veg': os.getenv('VEG_ASSISTANT_ID'),
+            'vegan': os.getenv('VEGAN_ASSISTANT_ID'),
         }
 
     def ask_assistant(self, recipe_text, parser_type):

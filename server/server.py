@@ -31,13 +31,23 @@ def recommend():
     original_recipe_json = assistants.ask_assistant(parsed_recipe, 'emissions')
     optimized_recipe_json = assistants.ask_assistant(
         original_recipe_json, 'optimizer')
+    veg_recipe_json = assistants.ask_assistant(
+        original_recipe_json, 'veg')
+    vegan_recipe_json = assistants.ask_assistant(
+        original_recipe_json, 'vegan')
 
     original_recipe_dict = GPTHandler.format_gpt_response(
-        original_recipe_json, 'original')
-    # optimized_recipe = GPTHandler.format_gpt_response(
-    #     optimized_recipe_json, 'optimized')
+        original_recipe_json)
+    optimized_recipe_dict = GPTHandler.format_gpt_response(
+        optimized_recipe_json)
+    veg_recipe_dict = GPTHandler.format_gpt_response(
+        veg_recipe_json)
+    vegan_recipe_dict = GPTHandler.format_gpt_response(
+        vegan_recipe_json)
     print(original_recipe_dict)
-    # print(optimized_recipe)
+    print(optimized_recipe_dict)
+    print(veg_recipe_dict)
+    print(vegan_recipe_dict)
     # recommendation_dict = json.loads(recommendation)
     # get response drom recommendation
 
