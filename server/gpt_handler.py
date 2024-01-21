@@ -1,6 +1,8 @@
+import json
 import os
 import requests
 from openai import OpenAI
+import re
 
 OpenAI.api_key = os.getenv('OPENAI_API_KEY')
 client = OpenAI()
@@ -29,7 +31,7 @@ class GPTHandler:
             assistant_id=assistant_id
         )
         # make request
-        response = self.request_assistant_on_thread(
+        response = self.wait_for_assistant_on_thread(
             thread, thread_message, run)
 
         return response
@@ -39,7 +41,7 @@ class GPTHandler:
 
         return requests.get(url=url)
 
-    def request_assistant_on_thread(self, thread, thread_message, run):
+    def wait_for_assistant_on_thread(self, thread, thread_message, run):
         while run.status in ["queued", "in_progress"]:
             keep_retrieving_run = client.beta.threads.runs.retrieve(
                 thread_id=thread.id,
@@ -60,6 +62,24 @@ class GPTHandler:
                 print(f"Run status: {keep_retrieving_run.status}")
                 break
         return all_messages
+
+    @staticmethod
+    def get_gpt_response(recommendation_string):
+        print(recommendation_string)
+        recommendation_string = recommendation_string.split("value='")
+        recommendation_string = recommendation_string[1]
+        recommendation_string = recommendation_string.split("}'")
+        recommendation_string = recommendation_string[0]
+        recommendation_string = recommendation_string.strip('{')
+        recommendation_string = recommendation_string.strip('}')
+        recommendation_string = recommendation_string.replace('"', '')
+        print(recommendation_string + '\n')
+        if recommendation_string != "":
+            dict_result = json.dumps(recommendation_string)
+            print(dict_result + 'DICT\n')
+            return dict_result
+
+        return {}
 
     @staticmethod
     def format_gpt_response():
