@@ -12,19 +12,45 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
 
 import Footer from './footer'
 import { Numbers } from '@mui/icons-material'
 
 export default function Ingredient({ recipeObject, recipeType }) {
+  const [totalCarbon, setTotalCarbon] = React.useState(null)
+
   function capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
-  const listStyles = {
-    height: '300px', // Fixed height
-    overflowY: 'auto',
-    padding: '10px',
+
+  function createData(name, calories, fat, carbs, protein) {
+    return { name, calories, fat, carbs, protein }
   }
+
+  const tableContainerStyles = {
+    maxHeight: '600px',
+    minWidth: '400px',
+    overflowY: 'auto',
+  }
+
+  React.useEffect(() => {
+    const lineItems = recipeObject.Ingredients
+    let carbonCount = 0
+    lineItems.forEach((item) => {
+      carbonCount += item.carbon
+    })
+    setTotalCarbon(parseFloat(carbonCount.toFixed(2)))
+  }, [recipeObject, recipeType])
+
+  const headerStyles = { fontWeight: 'bold', color: '#4B4B4B' }
+  const rows = recipeObject.Ingredients
 
   return (
     <Box sx={{ flex: 1, p: 3, flexGrow: 1 }}>
@@ -36,26 +62,41 @@ export default function Ingredient({ recipeObject, recipeType }) {
         {recipeType}
       </Typography>
 
-      <div>
-        <List sx={listStyles}>
-          {Object.keys(recipeObject)
-            .filter((item) => item.includes('Ingredient'))
-            .map((item, index) => {
-              const num = String(index + 1)
-              const obj = recipeObject[item]
-              const name = Object.keys(obj)[0]
-              const carbon = obj[name].carbon
-              const amount = obj[name].amound
-              return (
-                <ListItem disablePadding key={name}>
-                  <Typography variant="body2">
-                    {num + ') ' + capitalizeFirstLetter(name)}
-                  </Typography>
-                </ListItem>
-              )
-            })}
-        </List>
-      </div>
+      <Typography sx={{ mb: 1.5, fontSize: 14, marginBottom: 2 }} color="text.secondary">
+        {`Carbon Emissions: ${totalCarbon} kg CO2e`}
+      </Typography>
+
+      <TableContainer component={Paper} style={tableContainerStyles} elevation={1}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="left" style={headerStyles}>
+                Ingredient
+              </TableCell>
+              <TableCell align="right" style={headerStyles}>
+                Amount
+              </TableCell>
+              <TableCell align="right" style={headerStyles}>
+                Total Carbon (kg CO2e)
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row, index) => (
+              <TableRow
+                key={row.name + String(index)}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell align="left" component="th" scope="row">
+                  {capitalizeFirstLetter(row.name)}
+                </TableCell>
+                <TableCell align="right">{row.amount}</TableCell>
+                <TableCell align="right">{row.carbon}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Box>
   )
 }

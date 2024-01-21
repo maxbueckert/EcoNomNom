@@ -16,12 +16,11 @@ export default function BasicCard() {
   const [recipeObject, setRecipeObject] = React.useState(null)
   const styles = {
     container: {
-      zIndex: 999,
+      zIndex: 99999999999999,
       position: 'fixed',
       bottom: 100,
       right: 20,
       minWidth: 500,
-      minHeight: 500,
     },
   }
 

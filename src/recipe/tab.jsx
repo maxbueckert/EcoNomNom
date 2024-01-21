@@ -12,7 +12,7 @@ import Footer from './footer'
 
 function TabPanel(props) {
   const { children, value, index, recipeObject } = props
-  const tabLabels = ['Low Carbon', 'Vegetarian', 'Vegan']
+  const tabLabels = ['Original', 'Low Emission', 'Vegetarian', 'Vegan']
 
   return (
     <div
@@ -41,7 +41,6 @@ function a11yProps(index) {
   return {
     id: `full-width-tab-${index}`,
     'aria-controls': `full-width-tabpanel-${index}`,
-    backgroundColor: '#8BC34A',
   }
 }
 
@@ -72,9 +71,10 @@ export default function FullWidthTabs({ recipeObject }) {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Low Carbon" {...a11yProps(0)} />
-          <Tab label="Vegetarian" {...a11yProps(1)} />
-          <Tab label="Vegan" {...a11yProps(2)} />
+          <Tab label="Original" {...a11yProps(0)} />
+          <Tab label="Low Emission" {...a11yProps(1)} />
+          <Tab label="Vegetarian" {...a11yProps(2)} />
+          <Tab label="Vegan" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -100,7 +100,14 @@ export default function FullWidthTabs({ recipeObject }) {
           index={2}
           dir={theme.direction}
         ></TabPanel>
+        <TabPanel
+          recipeObject={recipeObject}
+          value={value}
+          index={3}
+          dir={theme.direction}
+        ></TabPanel>
       </SwipeableViews>
+      <div style={{ height: 20 }}></div>
       <Footer></Footer>
     </Box>
   )

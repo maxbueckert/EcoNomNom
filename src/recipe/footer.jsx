@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 export default function Footer() {
   return (
     <Typography
-      sx={{ color: 'grey', position: 'absolute', bottom: 10, right: 10 }}
+      sx={{ color: 'grey', position: 'absolute', bottom: 10, right: 10, marginTop: 50 }}
       variant="caption"
     >
       Powered by EcoNomNom ©

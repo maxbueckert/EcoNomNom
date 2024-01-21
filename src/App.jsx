@@ -7,10 +7,11 @@ function App() {
   React.useEffect(() => {
     console.log('reloading')
     const innerHtmlText = document.body.innerText.toLowerCase()
+    const onGoogle = window.location.href.includes('google')
     console.log(innerHtmlText)
     const isRecipePage = innerHtmlText.includes('recipe') && innerHtmlText.includes('ingredient')
     console.log('recipe page? ' + isRecipePage)
-    setIsRecipePage(isRecipePage)
+    setIsRecipePage(isRecipePage && !onGoogle)
   }, [document.body])
 
   return (
