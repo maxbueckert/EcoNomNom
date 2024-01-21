@@ -48,7 +48,7 @@ def recommend():
     ultimate_dict = {}
     ultimate_dict['original'] = original_recipe_dict
     ultimate_dict['optimized'] = optimized_recipe_dict
-    ultimate_dict['vegetarian'] = vegan_recipe_dict
+    ultimate_dict['vegetarian'] = veg_recipe_dict
     ultimate_dict['vegan'] = vegan_recipe_dict
 
     return ultimate_dict
