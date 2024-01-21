@@ -11,9 +11,7 @@ function App() {
     const getRecipeObject = async (innerHtmlText) => {
       try {
         console.log('retreiving!!!!!!!!!!!!')
-        // const response = await axios.get(
-        //   `http://127.0.0.1:5000/recommend/?web_text=${innerHtmlText}`,
-        // )
+
         fetch('http://127.0.0.1:5000/recommend', {
           headers: {
             Accept: 'application/json',
@@ -45,7 +43,7 @@ function App() {
     }
   }, [])
 
-  return recipeObject ? (
+  return isRecipePage ? (
     <div>
       <FloatingActionButtons
         recipeObject={recipeObject}

@@ -35,7 +35,7 @@ export default function Ingredient({ recipeObject, recipeType }) {
   }
 
   const tableContainerStyles = {
-    maxHeight: '600px',
+    maxHeight: '400px',
     minWidth: '400px',
     overflowY: 'auto',
   }

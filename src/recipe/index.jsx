@@ -10,6 +10,8 @@ import Tab from '@mui/material/Tab'
 
 import CustomCardContent from './tab'
 
+import Loading from './loading'
+
 import TestJson from './test'
 
 export default function BasicCard({ recipeObject }) {
@@ -19,13 +21,14 @@ export default function BasicCard({ recipeObject }) {
       position: 'fixed',
       bottom: 100,
       right: 20,
-      minWidth: 500,
+      minWidth: recipeObject ? 500 : 300,
     },
   }
 
-  return !recipeObject ? null : (
+  return (
     <Card sx={styles.container}>
-      <CustomCardContent recipeObject={recipeObject}></CustomCardContent>
+      {recipeObject && <CustomCardContent recipeObject={recipeObject}></CustomCardContent>}
+      {!recipeObject && <Loading></Loading>}
     </Card>
   )
 }
