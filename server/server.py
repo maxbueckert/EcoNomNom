@@ -17,20 +17,13 @@ def hello():
 @app.route('/recommend', methods=['POST'])
 def recommend():
     print("WHAT THE HELL")
-    # get body from request
-    # web_text_json = request.get_json()
-    # print(web_text_json)
-    # code for handling request
     assistants = GPTHandler()
     print('Created assistants \n')
     # may need to chnage depending on frontend
     raw_text = request.get_json()['web_text']
     print('Got param\n')
     print(raw_text)
-    # raw_text = 'This is a recipe called the best chicken wings ever and i love it a lot and it is 1000 calories. The ingredients that you need are: 2 pounds of chicken wings, 1/2 cup barbeque sauce, 1/2 tsp salt, 2 stems of cilatro.'
-    # processed_text = HTMLTextProcessor.process_raw_html_text(raw_text)
-    # print('Processe text\n')
-    # print(processed_text)
+
     parsed_recipe = assistants.ask_assistant(raw_text, 'parser')
     print('Parsed Recipe\n')
     print(parsed_recipe)
@@ -68,15 +61,6 @@ def recommend():
     print('Compiled all recipes\n')
 
     return json.dumps(ultimate_dict)
-
-    # format gpt response for frontend
-
-    # error checking for recommendation
-    #   did we get a response from GPT?
-    #   does the response have all three recipe recommendations?
-    #   do all the recipe recommendations contain all ingredients from the original recipe?
-
-    # send final json to frontend
 
 
 if __name__ == '__main__':
