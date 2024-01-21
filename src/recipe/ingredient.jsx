@@ -7,26 +7,55 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+
+import Footer from './footer'
+import { Numbers } from '@mui/icons-material'
 
 export default function Ingredient({ recipeObject, recipeType }) {
-  console.log(recipeType)
+  function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+  const listStyles = {
+    height: '300px', // Fixed height
+    overflowY: 'auto',
+    padding: '10px',
+  }
+
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-        <Typography component="span" sx={{ fontStyle: 'italic', fontSize: 16 }}>
-          {recipeType}
-        </Typography>
-        {' - ' + recipeObject.Title}
+    <Box sx={{ flex: 1, p: 3, flexGrow: 1 }}>
+      <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
+        {recipeObject.Title}
       </Typography>
 
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        adjective
+      <Typography sx={{ mb: 1.5, fontStyle: 'italic' }} color="text.secondary">
+        {recipeType}
       </Typography>
-      <Typography variant="body2">
-        well meaning and kindly.
-        <br />
-        {'"a benevolent smile"'}
-      </Typography>
+
+      <div>
+        <List sx={listStyles}>
+          {Object.keys(recipeObject)
+            .filter((item) => item.includes('Ingredient'))
+            .map((item, index) => {
+              const num = String(index + 1)
+              const obj = recipeObject[item]
+              const name = Object.keys(obj)[0]
+              const carbon = obj[name].carbon
+              const amount = obj[name].amound
+              return (
+                <ListItem disablePadding key={name}>
+                  <Typography variant="body2">
+                    {num + ') ' + capitalizeFirstLetter(name)}
+                  </Typography>
+                </ListItem>
+              )
+            })}
+        </List>
+      </div>
     </Box>
   )
 }

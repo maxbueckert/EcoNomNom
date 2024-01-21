@@ -8,6 +8,7 @@ import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
 
 import Ingredient from './ingredient'
+import Footer from './footer'
 
 function TabPanel(props) {
   const { children, value, index, recipeObject } = props
@@ -19,9 +20,12 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
+      style={{ flex: 1, p: 3, flexGrow: 1 }}
     >
       {value === index && (
-        <Ingredient recipeType={tabLabels[index]} recipeObject={recipeObject}></Ingredient>
+        <>
+          <Ingredient recipeType={tabLabels[index]} recipeObject={recipeObject}></Ingredient>
+        </>
       )}
     </div>
   )
@@ -54,7 +58,7 @@ export default function FullWidthTabs({ recipeObject }) {
   }
 
   return (
-    <Box sx={{ bgcolor: 'background.paper', width: 500 }}>
+    <Box sx={{ bgcolor: 'background.paper', flex: 1, flexGrow: 1 }}>
       <AppBar position="static" sx={{ bgcolor: '#8BC34A' }}>
         <Tabs
           value={value}
@@ -78,16 +82,26 @@ export default function FullWidthTabs({ recipeObject }) {
         index={value}
         onChangeIndex={handleChangeIndex}
       >
-        <TabPanel recipeObject={recipeObject} value={value} index={0} dir={theme.direction}>
-          Item One
-        </TabPanel>
-        <TabPanel recipeObject={recipeObject} value={value} index={1} dir={theme.direction}>
-          Item Two
-        </TabPanel>
-        <TabPanel recipeObject={recipeObject} value={value} index={2} dir={theme.direction}>
-          Item Three
-        </TabPanel>
+        <TabPanel
+          recipeObject={recipeObject}
+          value={value}
+          index={0}
+          dir={theme.direction}
+        ></TabPanel>
+        <TabPanel
+          recipeObject={recipeObject}
+          value={value}
+          index={1}
+          dir={theme.direction}
+        ></TabPanel>
+        <TabPanel
+          recipeObject={recipeObject}
+          value={value}
+          index={2}
+          dir={theme.direction}
+        ></TabPanel>
       </SwipeableViews>
+      <Footer></Footer>
     </Box>
   )
 }

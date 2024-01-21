@@ -19,6 +19,11 @@ const testJson = {
       amount: '2 cups',
     },
   },
+  Ingredient3: {
+    name: `instant white rice`,
+    carbon: 1,
+    amount: '2 cups',
+  },
   Ingredient4: {
     'cream of chicken soup': {
       carbon: 1.9,
