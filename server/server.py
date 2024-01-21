@@ -14,18 +14,19 @@ def hello():
     return 'Hello World!'
 
 
-@app.route('/recommend')
-def recommend():
+@app.route('/recommend/webText')
+def recommend(webText):
     if request.method != 'GET':
         return jsonify(status="error", message=f'invalid request type ({request.method}) made to /recommend')
-    elif 'web_text' not in request.args:
-        return jsonify(status="error", message=f'invalid request via missing html text argument')
+    # elif 'web_text' not in request.args:
+    #     return jsonify(status="error", message=f'invalid request via missing html text argument')
 
     # code for handling request
     assistants = GPTHandler()
     print('Created assistants \n')
     # may need to chnage depending on frontend
-    raw_text = request.args['web_text']
+    # raw_text = request.args['web_text']
+    raw_text = webText
     print('Got param\n')
     print(raw_text)
     # raw_text = 'This is a recipe called the best chicken wings ever and i love it a lot and it is 1000 calories. The ingredients that you need are: 2 pounds of chicken wings, 1/2 cup barbeque sauce, 1/2 tsp salt, 2 stems of cilatro.'
