@@ -61,7 +61,8 @@ class GPTHandler:
             else:
                 print(f"Run status: {keep_retrieving_run.status}")
                 break
-        return all_messages
+
+        return all_messages.data[0].content[0].text.value
 
     @staticmethod
     def get_gpt_response(recommendation_string):
@@ -74,10 +75,28 @@ class GPTHandler:
         recommendation_string = recommendation_string.strip('}')
         recommendation_string = recommendation_string.replace('"', '')
         print(recommendation_string + '\n')
-        if recommendation_string != "":
-            dict_result = json.dumps(recommendation_string)
-            print(dict_result + 'DICT\n')
-            return dict_result
+
+        recommendation_list = recommendation_string.split(',')
+        dict = {}
+        for item in recommendation_list:
+            print(item)
+            key, value = item.split(':')
+            if value[0] != '{':
+                dict[key] = value.strip(' ')
+            else:
+                dict[key] = {}
+                value = value.strip('{')
+                value = value.strip('}')
+                value_list = value.split(',')
+                for sub_item in value_list:
+                    print(sub_item)
+                    sub_key, sub_value = sub_item.split(',')
+                    dict[key][sub_key] = sub_value.strip(' ')
+        print(dict)
+        # if recommendation_string != "":
+        #     dict_result = json.dumps(recommendation_string)
+        #     print(dict_result + 'DICT\n')
+        #     return dict_result
 
         return {}
 
