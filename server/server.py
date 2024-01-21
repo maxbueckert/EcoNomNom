@@ -44,14 +44,14 @@ def recommend():
         veg_recipe_json)
     vegan_recipe_dict = GPTHandler.format_gpt_response(
         vegan_recipe_json)
-    print(original_recipe_dict)
-    print(optimized_recipe_dict)
-    print(veg_recipe_dict)
-    print(vegan_recipe_dict)
-    # recommendation_dict = json.loads(recommendation)
-    # get response drom recommendation
 
-    return 'worked!'
+    ultimate_dict = {}
+    ultimate_dict['original'] = original_recipe_dict
+    ultimate_dict['optmized'] = optimized_recipe_dict
+    ultimate_dict['vegetarian'] = vegan_recipe_dict
+    ultimate_dict['vegan'] = vegan_recipe_dict
+
+    return ultimate_dict
 
     # format gpt response for frontend
 
