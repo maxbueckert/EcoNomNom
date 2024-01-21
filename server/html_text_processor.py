@@ -19,11 +19,11 @@ class HTMLTextProcessor:
         Returns bool of whether recipe string or not.'''
         # check if recipe/Recipe and ingredients/Ingredients is in text
         recipe_ingredient_query = '(.*(.*((recipe|Recipe).*(ingredients|Ingredients)).*)|(.*((ingredients|Ingredients).*(recipe|Recipe)).*))'
-        query_result = raw_text.search(recipe_ingredient_query)
+        query_result = re.search(recipe_ingredient_query, raw_text)
         if query_result:
             # check if is in text
             quantity_query = '[0-9]+\s*((oz|ounce)|(g|gram)|cup|(tbs|TBS|tablespoon)|(tsp|TSP|teaspoon)|pound|small|large)'
-            query_result = raw_text.search(quantity_query)
+            query_result = re.search(quantity_query, raw_text)
             if query_result:
                 return True
             return False
@@ -34,8 +34,8 @@ class HTMLTextProcessor:
         '''Reduces html text before sending to GPT. Assumes that input html text is from a recipe page. 
         Returns the reduced text as a string, or empty string if no match is found.'''
         find_ingredient_list_query = '(ingredient|Ingredient|INGREDIENT)(\s*.*)*'
-        text_after_ingredient = recipe_page_text.search(
-            find_ingredient_list_query)
+        text_after_ingredient = re.search(
+            find_ingredient_list_query, recipe_page_text)
 
         if text_after_ingredient:
             return text_after_ingredient.string

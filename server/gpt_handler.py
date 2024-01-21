@@ -2,8 +2,8 @@ import os
 import requests
 from openai import OpenAI
 
-client = OpenAI()
 OpenAI.api_key = os.getenv('OPENAI_API_KEY')
+client = OpenAI()
 assistant_id = os.getenv('ASSISTANT_ID')
 
 
@@ -14,7 +14,8 @@ class GPTHandler:
 
     def ask_assistant(self, recipe_text):
         # get assistant
-        self.assistant = self.retrieve_assistant()
+        if self.assistant == {}:
+            self.assistant = self.retrieve_assistant()
         # create thread
         thread = client.beta.threads.create()
         # add prompt to thread
@@ -25,8 +26,7 @@ class GPTHandler:
         )
         run = client.beta.threads.runs.create(
             thread_id=thread.id,
-            assistant_id=self.assistant.id,
-            instructions="Please address the user as Rok Benko."
+            assistant_id=assistant_id
         )
         # make request
         response = self.request_assistant_on_thread(
