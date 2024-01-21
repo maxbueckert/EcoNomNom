@@ -22,7 +22,6 @@ import Paper from '@mui/material/Paper'
 
 import Footer from './footer'
 import { Numbers } from '@mui/icons-material'
-import Ingredient from '../../build/src/recipe/ingredient.jsx'
 
 export default function Ingredient({ recipeObject, recipeType }) {
   const [totalCarbon, setTotalCarbon] = React.useState(null)
@@ -41,8 +40,15 @@ export default function Ingredient({ recipeObject, recipeType }) {
     overflowY: 'auto',
   }
 
+  const rows = Object.keys(recipeObject[recipeType])
+    .filter((ingred) => ingred.includes('Ingredient'))
+    .map((item) => {
+      const x = recipeObject[recipeType][item]
+      return x
+    })
+
   React.useEffect(() => {
-    const lineItems = recipeObject.Ingredients
+    const lineItems = rows
     let carbonCount = 0
     lineItems.forEach((item) => {
       carbonCount += item.carbon
@@ -51,19 +57,21 @@ export default function Ingredient({ recipeObject, recipeType }) {
   }, [recipeObject, recipeType])
 
   const headerStyles = { fontWeight: 'bold', color: '#4B4B4B' }
-
-  const rows = Object.keys(recipeObject[recipeType])
-    .filter((ingred) => item.includes('Ingredients'))
-    .map(recipeObject[recipeType][ingred])
+  console.log('in ingredient!!!!!!!!')
+  console.log(recipeObject)
+  console.log(Object.keys(recipeObject[recipeType]))
+  console.log(
+    Object.keys(recipeObject[recipeType]).filter((ingred) => ingred.includes('Ingredient')),
+  )
 
   return (
     <Box sx={{ flex: 1, p: 3, flexGrow: 1 }}>
       <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
-        {recipeObject.Title}
+        {recipeObject[recipeType].Title}
       </Typography>
 
       <Typography sx={{ mb: 1.5, fontStyle: 'italic' }} color="text.secondary">
-        {recipeType}
+        {capitalizeFirstLetter(recipeType)}
       </Typography>
 
       <Typography sx={{ mb: 1.5, fontSize: 14, marginBottom: 2 }} color="text.secondary">

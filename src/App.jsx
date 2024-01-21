@@ -24,7 +24,7 @@ function App() {
         })
           .then(async function (res) {
             const result = await res.json()
-            console.log(res)
+            console.log(result)
             setRecipeObject(result)
           })
           .catch(function (res) {

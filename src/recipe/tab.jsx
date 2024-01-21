@@ -12,7 +12,7 @@ import Footer from './footer'
 
 function TabPanel(props) {
   const { children, value, index, recipeObject } = props
-  const tabLabels = ['Original', 'Low Emission', 'Vegetarian', 'Vegan']
+  const tabLabels = ['original', 'optimized', 'vegetarian', 'vegan']
 
   return (
     <div
