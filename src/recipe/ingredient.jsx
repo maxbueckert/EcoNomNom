@@ -22,6 +22,7 @@ import Paper from '@mui/material/Paper'
 
 import Footer from './footer'
 import { Numbers } from '@mui/icons-material'
+import Ingredient from '../../build/src/recipe/ingredient.jsx'
 
 export default function Ingredient({ recipeObject, recipeType }) {
   const [totalCarbon, setTotalCarbon] = React.useState(null)
@@ -50,7 +51,10 @@ export default function Ingredient({ recipeObject, recipeType }) {
   }, [recipeObject, recipeType])
 
   const headerStyles = { fontWeight: 'bold', color: '#4B4B4B' }
-  const rows = recipeObject.Ingredients
+
+  const rows = Object.keys(recipeObject[recipeType])
+    .filter((ingred) => item.includes('Ingredients'))
+    .map(recipeObject[recipeType][ingred])
 
   return (
     <Box sx={{ flex: 1, p: 3, flexGrow: 1 }}>

@@ -5,6 +5,7 @@ import axios from 'axios'
 function App() {
   const [isRecipePage, setIsRecipePage] = React.useState(false)
   const [hasRequested, setHasRequested] = React.useState(false)
+  const [recipeObject, setRecipeObject] = React.useState(null)
 
   React.useEffect(() => {
     const getRecipeObject = async (innerHtmlText) => {
@@ -21,8 +22,10 @@ function App() {
           method: 'POST',
           body: JSON.stringify({ web_text: innerHtmlText }),
         })
-          .then(function (res) {
+          .then(async function (res) {
+            const result = await res.json()
             console.log(res)
+            setRecipeObject(result)
           })
           .catch(function (res) {
             console.log(res)
@@ -38,16 +41,19 @@ function App() {
     const onGoogle = window.location.href.includes('google')
     const isRecipePage = innerHtmlText.includes('recipe') && innerHtmlText.includes('ingredient')
     setIsRecipePage(isRecipePage && !onGoogle)
-    if (!hasRequested) {
+    if (!hasRequested && isRecipePage && !onGoogle) {
       getRecipeObject(innerHtmlText)
     }
   }, [])
 
-  return (
+  return recipeObject ? (
     <div>
-      <FloatingActionButtons isRecipePage={isRecipePage}></FloatingActionButtons>
+      <FloatingActionButtons
+        recipeObject={recipeObject}
+        isRecipePage={isRecipePage}
+      ></FloatingActionButtons>
     </div>
-  )
+  ) : null
 }
 
 export default App

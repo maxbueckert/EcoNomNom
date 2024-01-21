@@ -12,8 +12,7 @@ import CustomCardContent from './tab'
 
 import TestJson from './test'
 
-export default function BasicCard() {
-  const [recipeObject, setRecipeObject] = React.useState(null)
+export default function BasicCard({ recipeObject }) {
   const styles = {
     container: {
       zIndex: 99999999999999,
@@ -23,10 +22,6 @@ export default function BasicCard() {
       minWidth: 500,
     },
   }
-
-  React.useEffect(() => {
-    setRecipeObject(TestJson)
-  }, [])
 
   return !recipeObject ? null : (
     <Card sx={styles.container}>

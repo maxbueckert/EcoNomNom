@@ -5,7 +5,7 @@ import LocalDining from '@mui/icons-material/LocalDining'
 
 import Recipe from '../recipe'
 
-export default function FloatingActionButtons({ isRecipePage }) {
+export default function FloatingActionButtons({ recipeObject, isRecipePage }) {
   const [showPopUp, setShowPopUp] = React.useState(false)
   React.useEffect(() => {
     // This will not work
@@ -32,7 +32,7 @@ export default function FloatingActionButtons({ isRecipePage }) {
 
   return (
     <>
-      {showPopUp && <Recipe></Recipe>}
+      {showPopUp && <Recipe recipeObject={recipeObject}></Recipe>}
       <Box sx={styles.fabContainer}>
         <Fab
           sx={showPopUp || !isRecipePage ? styles.fabLogoSelected : styles.fabLogoUnselected}
