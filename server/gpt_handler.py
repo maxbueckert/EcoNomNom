@@ -6,18 +6,20 @@ import re
 
 OpenAI.api_key = os.getenv('OPENAI_API_KEY')
 client = OpenAI()
-assistant_id = os.getenv('ASSISTANT_ID')
 
 
 class GPTHandler:
 
     def __init__(self):
-        self.assistant = {}
+        self.assistant_ids = {
+            'parser': os.getenv('PARSER_ASSISTANT_ID'),
+            'emissions': os.getenv('EMISSIONS_ASSISTANT_ID'),
+            'optimizer': os.getenv('OPTIMIZER_ASSISTANT_ID')
+        }
 
-    def ask_assistant(self, recipe_text):
+    def ask_assistant(self, recipe_text, parser_type):
         # get assistant
-        if self.assistant == {}:
-            self.assistant = self.retrieve_assistant()
+        assistant = self.retrieve_assistant(self.assistant_ids[parser_type])
         # create thread
         thread = client.beta.threads.create()
         # add prompt to thread
@@ -28,7 +30,7 @@ class GPTHandler:
         )
         run = client.beta.threads.runs.create(
             thread_id=thread.id,
-            assistant_id=assistant_id
+            assistant_id=self.assistant_ids[parser_type]
         )
         # make request
         response = self.wait_for_assistant_on_thread(
@@ -36,7 +38,7 @@ class GPTHandler:
 
         return response
 
-    def retrieve_assistant(self):
+    def retrieve_assistant(self, assistant_id):
         url = f'https://api.openai.com/v1/assistants/{assistant_id}'
 
         return requests.get(url=url)
@@ -65,21 +67,9 @@ class GPTHandler:
         return all_messages.data[0].content[0].text.value
 
     @staticmethod
-    def format_gpt_response():
-        '''Formats the GPT response into what our frontend expects.
-        Input: {"Calories":#,
-        "Ing1":{
-        "original":[carbon #, amount #],
-        "replacement1":[carbon #, amount #],
-        ...
-        },
-        "Ing2":...}
+    def format_gpt_response(text_response):
+        text_response = text_response.replace("```", "")
+        text_response = text_response.replace('json', "")
+        text_response_dict = json.loads(text_response)
 
-        Output: {"Calories":#,
-        "Ing1":{
-        "original":{"carbon":#, "amount":#},
-        "replacement1":{"carbon":#, "amount":#},
-        ...
-        },
-        "Ing2":...}'''
-        pass
+        return text_response_dict
