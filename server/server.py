@@ -29,10 +29,8 @@ def recommend():
     processed_text = HTMLTextProcessor.process_raw_html_text(raw_text)
     recommendation = assistant.ask_assistant(
         processed_text)  # send to gpt and get response
-    print(recommendation)
+    recommendation = json.loads(recommendation)
     # get response drom recommendation
-    # recommendation = GPTHandler.get_gpt_response(str(recommendation))
-    # print(recommendation)
 
     return "worked!"
 

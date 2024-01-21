@@ -65,42 +65,6 @@ class GPTHandler:
         return all_messages.data[0].content[0].text.value
 
     @staticmethod
-    def get_gpt_response(recommendation_string):
-        print(recommendation_string)
-        recommendation_string = recommendation_string.split("value='")
-        recommendation_string = recommendation_string[1]
-        recommendation_string = recommendation_string.split("}'")
-        recommendation_string = recommendation_string[0]
-        recommendation_string = recommendation_string.strip('{')
-        recommendation_string = recommendation_string.strip('}')
-        recommendation_string = recommendation_string.replace('"', '')
-        print(recommendation_string + '\n')
-
-        recommendation_list = recommendation_string.split(',')
-        dict = {}
-        for item in recommendation_list:
-            print(item)
-            key, value = item.split(':')
-            if value[0] != '{':
-                dict[key] = value.strip(' ')
-            else:
-                dict[key] = {}
-                value = value.strip('{')
-                value = value.strip('}')
-                value_list = value.split(',')
-                for sub_item in value_list:
-                    print(sub_item)
-                    sub_key, sub_value = sub_item.split(',')
-                    dict[key][sub_key] = sub_value.strip(' ')
-        print(dict)
-        # if recommendation_string != "":
-        #     dict_result = json.dumps(recommendation_string)
-        #     print(dict_result + 'DICT\n')
-        #     return dict_result
-
-        return {}
-
-    @staticmethod
     def format_gpt_response():
         '''Formats the GPT response into what our frontend expects.
         Input: {"Calories":#,
