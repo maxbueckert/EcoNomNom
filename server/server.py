@@ -18,8 +18,8 @@ def hello():
 def recommend():
     print("WHAT THE HELL")
     # get body from request
-    web_text_json = request.get_json()
-    print(web_text_json)
+    # web_text_json = request.get_json()
+    # print(web_text_json)
     # code for handling request
     assistants = GPTHandler()
     print('Created assistants \n')
@@ -28,21 +28,27 @@ def recommend():
     print('Got param\n')
     print(raw_text)
     # raw_text = 'This is a recipe called the best chicken wings ever and i love it a lot and it is 1000 calories. The ingredients that you need are: 2 pounds of chicken wings, 1/2 cup barbeque sauce, 1/2 tsp salt, 2 stems of cilatro.'
-    processed_text = HTMLTextProcessor.process_raw_html_text(raw_text)
-    print('Processe text\n')
-    parsed_recipe = assistants.ask_assistant(processed_text, 'parser')
+    # processed_text = HTMLTextProcessor.process_raw_html_text(raw_text)
+    # print('Processe text\n')
+    # print(processed_text)
+    parsed_recipe = assistants.ask_assistant(raw_text, 'parser')
     print('Parsed Recipe\n')
+    print(parsed_recipe)
     original_recipe_json = assistants.ask_assistant(parsed_recipe, 'emissions')
     print('Got Original Recipe\n')
+    print(original_recipe_json)
     optimized_recipe_json = assistants.ask_assistant(
         original_recipe_json, 'optimizer')
     print('Got Optimized Recipe\n')
+    print(optimized_recipe_json)
     veg_recipe_json = assistants.ask_assistant(
         original_recipe_json, 'veg')
     print('Got Vegetarian Recipe\n')
+    print(veg_recipe_json)
     vegan_recipe_json = assistants.ask_assistant(
         original_recipe_json, 'vegan')
     print('Got Vegan Recipe\n')
+    print(vegan_recipe_json)
 
     original_recipe_dict = GPTHandler.format_gpt_response(
         original_recipe_json)

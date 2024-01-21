@@ -72,6 +72,8 @@ class GPTHandler:
     def format_gpt_response(text_response):
         text_response = text_response.replace("```", "")
         text_response = text_response.replace('json', "")
+        print('HERE in FORMAT\n')
+        print(text_response)
         text_response_dict = json.loads(text_response)
 
         return text_response_dict
